@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Mission to Mars</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 
 <body>
@@ -18,10 +19,48 @@
     </div>
 
     <!-- Craigslist Listings -->
-    <div class="row" id="craiglist-listings">
+    <div class="row">
       <div class="col-md-12">
-        <h4 class="heading">{{missions.price}} {{missions.headline}}</h4>
-        <small>{{missions.hood}}</small>
+        <h2>Latest Mars News</h2>
+        <h4>{{missions.news_title}}</h4>
+        <p>{{missions.news_details}}</p>
+
+      </div>
+    </div>
+    <div class="row mt-5">
+      <div class="col-md-8">
+        <h2>Featured Mars Image</h2>
+        <hr>
+        <img src="{{missions.featured_image_url}}" class="img-fluid" alt="Featured image">
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-body">
+            <h4>Current Weather on Mars</h4>
+            <p class="card-text">{{missions.current_weather}}</p>
+          </div>
+        </div>
+
+        <h4 class="mt-4">Mars Facts</h4>
+        {{missions.facts | safe}}
+      </div>
+    </div>
+    <div class="row mt-5">
+      <div class="col-md-12">
+        <h2>Mars Hemispheres</h2>
+        <hr>
+        <div class="row">
+          {% for hemi in missions.hemi_urls %}
+          <div class="col-sm-6 mb-3">
+            <div class="card">
+              <img src="{{hemi.img_url}}" class="card-img-top" alt="hemi.title">
+              <div class="card-body">
+                <h4 class="card-title">{{hemi.title}}</h4>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
       </div>
     </div>
 
@@ -29,4 +68,3 @@
 </body>
 
 </html>
-

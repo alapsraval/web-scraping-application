@@ -11,7 +11,7 @@ def init_browser():
     executable_path = {"executable_path": "/usr/local/bin/chromedriver"}
     return Browser("chrome", **executable_path, headless=False)
 
-def mars_news():
+def mars_news(browser):
     mars_news_url = 'https://mars.nasa.gov/news/'
     browser.visit(mars_news_url)
     if browser.is_element_present_by_css('li.slide', wait_time=10):  
@@ -20,14 +20,16 @@ def mars_news():
         slides = soup.find_all('li', class_='slide')
         news_title = slides[0].find('div',class_='content_title').text
         news_p = slides[0].find('div',class_='article_teaser_body').text
-        print('News Headline: ', news_title)
-        print('-------------')
-        print(news_p,'\n')
 
-def mars_jpl_images():
+        return news_title, news_p
+        # print('News Headline: ', news_title)
+        # print('-------------')
+        # print(news_p,'\n')
+
+def mars_jpl_images(browser):
     mars_jpl_url = 'https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars'
     browser.visit(mars_jpl_url)
-
+    
     if browser.is_element_present_by_css('section.primary_media_feature', wait_time=10):
         browser.click_link_by_partial_text('FULL IMAGE')
         browser.click_link_by_partial_text('more info')
@@ -40,27 +42,20 @@ def mars_jpl_images():
         #option 3
         #images = soup_jpl.find_all('div', class_='download_tiff')
         #featured_image_url = images[1].a.get('href')
-        print('Featured Image URL: ', featured_image_url)
+        # print('Featured Image URL: ', featured_image_url)
+        return featured_image_url
 
-def mars_weather():
+def mars_weather(browser):
     mars_weather_url = 'https://twitter.com/marswxreport?lang=en'
     browser.visit(mars_weather_url)
-    if browser.is_element_present_by_css('section article', wait_time=10):
-        html_weather = browser.html
-        soup_weather = bs(html_weather, 'html.parser')
-        latest_tweet = browser.find_by_css('[data-testid="tweet"]')[0]
-        mars_weather = latest_tweet.find_by_css('div.r-jwli3a.r-16dba41.r-bnwqim').text
-        print('Latest Tweet')
-        print('------------')
-        print(mars_weather)
-
+    
     html_weather = requests.get(mars_weather_url)
     soup_weather = bs(html_weather.text, 'html.parser')
 
     tweet_container = soup_weather.find('div', class_="js-tweet-text-container")
     latest_tweet = tweet_container.find('p', class_="TweetTextSize TweetTextSize--normal js-tweet-text tweet-text")
     mars_weather = latest_tweet.text
-    mars_weather
+    return mars_weather
 
 def mars_facts():
     mars_facts_url = 'https://space-facts.com/mars/'
@@ -71,9 +66,9 @@ def mars_facts():
     df['Fact'] = df['Fact'].str.replace(':', '') # remove ':' from Fact column
     df.set_index('Fact', inplace=True)
     html_table = df.to_html()
-    html_table
+    return html_table
 
-def mars_hemi():
+def mars_hemi(browser):
     mars_hemi_url = 'https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars'
 
     browser.visit(mars_hemi_url)
@@ -92,20 +87,20 @@ def mars_hemi():
         browser.back()
         hemisphere_image_urls.append({"title": title, "img_url": img_url})
         
-    hemisphere_image_urls
+    return hemisphere_image_urls
 
 def scrape():
     browser = init_browser()
-    listings = {}
+    mars_data = {}
 
-    url = "https://chicago.craigslist.org/d/apts-housing-for-rent/search/apa?postal=60532&search_distance=100"
-    browser.visit(url)
+    news_title, news_details = mars_news(browser)
 
-    html = browser.html
-    soup = BeautifulSoup(html, "html.parser")
+    mars_data["news_title"] = news_title
+    mars_data["news_details"] = news_details
+    mars_data["featured_image_url"] = mars_jpl_images(browser)
+    mars_data["current_weather"] = mars_weather(browser)
+    mars_data["facts"] = mars_facts()
+    mars_data["hemi_urls"] = mars_hemi(browser)
 
-    listings["headline"] = soup.find("a", class_="result-title").get_text()
-    listings["price"] = soup.find("span", class_="result-price").get_text()
-    listings["hood"] = soup.find("span", class_="result-hood").get_text()
-
-    return listings
+    browser.quit()
+    return mars_data
