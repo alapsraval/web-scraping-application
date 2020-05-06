@@ -59,13 +59,14 @@ def mars_weather(browser):
 
 def mars_facts():
     mars_facts_url = 'https://space-facts.com/mars/'
-    
+
     tables = pd.read_html(mars_facts_url)
     df = tables[0]
     df.columns = ['Fact', 'Value']
     df['Fact'] = df['Fact'].str.replace(':', '') # remove ':' from Fact column
     df.set_index('Fact', inplace=True)
-    html_table = df.to_html()
+    df = df.rename_axis(None) # Remove Column Header "Fact"
+    html_table = df.to_html(classes="table table-bordered table-sm", border=0, justify='initial')
     return html_table
 
 def mars_hemi(browser):
