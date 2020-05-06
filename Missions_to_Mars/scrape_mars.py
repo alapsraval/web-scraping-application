@@ -43,7 +43,7 @@ def mars_jpl_images(browser):
         #images = soup_jpl.find_all('div', class_='download_tiff')
         #featured_image_url = images[1].a.get('href')
         # print('Featured Image URL: ', featured_image_url)
-        return featured_image_url
+        return featured_image_url, mars_jpl_url
 
 def mars_weather(browser):
     mars_weather_url = 'https://twitter.com/marswxreport?lang=en'
@@ -52,10 +52,14 @@ def mars_weather(browser):
     html_weather = requests.get(mars_weather_url)
     soup_weather = bs(html_weather.text, 'html.parser')
 
+    tweet_timestamp_container = soup_weather.find('div', class_="stream-item-header")
+    tweet_timestamp = tweet_timestamp_container.find('a', class_="tweet-timestamp")['title']
+
     tweet_container = soup_weather.find('div', class_="js-tweet-text-container")
     latest_tweet = tweet_container.find('p', class_="TweetTextSize TweetTextSize--normal js-tweet-text tweet-text")
-    mars_weather = latest_tweet.text
-    return mars_weather
+    mars_weather = latest_tweet.find_all(text=True)[0]
+    
+    return mars_weather, tweet_timestamp
 
 def mars_facts():
     mars_facts_url = 'https://space-facts.com/mars/'
@@ -84,9 +88,10 @@ def mars_hemi(browser):
         time.sleep(1)
         html_subpage = browser.html
         soup_subpage = bs(html_subpage, 'html.parser')
+        page_url = browser.url
         img_url = soup_subpage.find('div', 'downloads').ul.li.a['href']
         browser.back()
-        hemisphere_image_urls.append({"title": title, "img_url": img_url})
+        hemisphere_image_urls.append({"title": title, "img_url": img_url, "page_url": page_url})
         
     return hemisphere_image_urls
 
@@ -95,11 +100,15 @@ def scrape():
     mars_data = {}
 
     news_title, news_details = mars_news(browser)
+    featured_image_url, mars_jpl_url = mars_jpl_images(browser)
+    mars_weather_1, tweet_timestamp = mars_weather(browser)
 
     mars_data["news_title"] = news_title
     mars_data["news_details"] = news_details
-    mars_data["featured_image_url"] = mars_jpl_images(browser)
-    mars_data["current_weather"] = mars_weather(browser)
+    mars_data["featured_image_url"] = featured_image_url
+    mars_data["mars_jpl_url"] = mars_jpl_url
+    mars_data["current_weather"] = mars_weather_1
+    mars_data["current_weather_timestamp"] = tweet_timestamp
     mars_data["facts"] = mars_facts()
     mars_data["hemi_urls"] = mars_hemi(browser)
 

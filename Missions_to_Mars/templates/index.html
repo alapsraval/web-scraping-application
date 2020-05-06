@@ -30,12 +30,15 @@
       <div class="col-md-8">
         <h2>Featured Mars Image</h2>
         <hr>
-        <a href="{{missions.featured_image_url}}" target="_blank"><img src="{{missions.featured_image_url}}" class="img-fluid img-thumbnail" alt="Featured image"></a>
+        <a href="{{missions.mars_jpl_url}}" target="_blank"><img src="{{missions.featured_image_url}}" class="img-fluid img-thumbnail" alt="Featured image"></a>
       </div>
       <div class="col-md-4">
         <div class="card">
-          <div class="card-body">
+          <div class="card-header">
             <h4>Current Weather on Mars</h4>
+            <span class="card-subtitle text-muted">{{missions.current_weather_timestamp}}</span>
+          </div>
+          <div class="card-body">
             <p class="card-text">{{missions.current_weather}}</p>
           </div>
         </div>
@@ -52,7 +55,7 @@
           {% for hemi in missions.hemi_urls %}
           <div class="col-sm-6 mb-3">
             <div class="card">
-              <a href="{{hemi.img_url}}" target="_blank"><img src="{{hemi.img_url}}" class="card-img-top" alt="{{hemi.title}}"></a>
+              <a href="{{hemi.page_url}}" target="_blank"><img src="{{hemi.img_url}}" class="card-img-top" alt="{{hemi.title}}"></a>
               <div class="card-body">
                 <h4 class="card-title">{{hemi.title}}</h4>
               </div>
