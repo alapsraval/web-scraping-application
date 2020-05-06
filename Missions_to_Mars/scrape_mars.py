@@ -22,9 +22,6 @@ def mars_news(browser):
         news_p = slides[0].find('div',class_='article_teaser_body').text
 
         return news_title, news_p
-        # print('News Headline: ', news_title)
-        # print('-------------')
-        # print(news_p,'\n')
 
 def mars_jpl_images(browser):
     mars_jpl_url = 'https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars'
@@ -70,7 +67,7 @@ def mars_facts():
     df['Fact'] = df['Fact'].str.replace(':', '') # remove ':' from Fact column
     df.set_index('Fact', inplace=True)
     df = df.rename_axis(None) # Remove Column Header "Fact"
-    html_table = df.to_html(classes="table table-bordered table-sm", border=0, justify='initial')
+    html_table = df.to_html(classes="table table-bordered table-sm mb-0", border=0, justify='initial')
     return html_table
 
 def mars_hemi(browser):
