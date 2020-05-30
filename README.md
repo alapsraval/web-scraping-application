@@ -42,18 +42,20 @@ Use MongoDB with Flask templating to create a new HTML page that displays all of
 
 ## Requirements
 ### Modules Required
-       * pandas==0.23.3
-       * splinter==0.9.0
-       * pymongo==3.7.1
-       * numpy==1.15.0
-       * Flask==1.0.2
-       * requests==2.18.4
-       * beautifulsoup4==4.6.3
-       * gunicorn==19.9.0
-       * lxml==4.2.5
-       * beautifulsoup4==4.6.3
-       * bs4==0.0.1
-       * Flask-PyMongo==2.1.0
+      * pandas           : 0.25.3
+      * splinter==0.9.0
+      * beautifulsoup4==4.6.3
+      * requests==2.18.4
+      * pymongo==3.7.1
+      * numpy==1.15.0
+      * Flask==1.0.2
+      * requests==2.18.4
+      * gunicorn==19.9.0
+      * lxml==4.2.5
+      * bs4==0.0.1
+      * Flask-PyMongo==2.1.0
+
+import time
  
  ## Screenshot
 
