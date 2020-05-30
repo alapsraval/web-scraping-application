@@ -38,7 +38,7 @@ Initial scraping using Jupyter Notebook, BeautifulSoup, Pandas, and Requests/Spl
 
 Use MongoDB with Flask templating to create a new HTML page that displays all of the information that was scraped from the URLs above.
 
-* `index.html` displays all of the scraped data in the appropriate HTML elements.
+* `index.html` displays all of the scraped data in the appropriate HTML elements using Bootstrap Grid.
 
 ## Requirements
 ### Modules Required
