@@ -52,6 +52,7 @@ Use MongoDB with Flask templating to create a new HTML page that displays all of
 * Flask-PyMongo    : 2.3.0
 * pymongo          : 3.10.1
 * Flask            : 1.1.1
+* chromedriver     : 2.24.1
  
  ## Screenshot
 
