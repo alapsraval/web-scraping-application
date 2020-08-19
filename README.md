@@ -36,6 +36,8 @@ MongoDB with Flask templating is used to create a new HTML page that displays al
 
 * All of the scraped data is displayed in the appropriate HTML elements using Bootstrap Grid.
 
+- - -
+
 ## Requirements
 ### Modules Required
 * pandas           : 0.25.3
@@ -50,6 +52,8 @@ MongoDB with Flask templating is used to create a new HTML page that displays al
 * Flask            : 1.1.1
 * chromedriver     : 2.24.1
  
+ - - -
+
  ## Screenshot
 
  ![Screenshot](https://github.com/alapsraval/web-scraping-application/blob/master/screenshots/flask_app_screenshot.png)
