@@ -10,35 +10,31 @@ Initial scraping using Jupyter Notebook, BeautifulSoup, Pandas, and Requests/Spl
 
 ### NASA Mars News
 
-* Scrape the [NASA Mars News Site](https://mars.nasa.gov/news/) and collect the latest News Title and Paragraph Text.
+* The [NASA Mars News Site](https://mars.nasa.gov/news/) is scraped for latest News Title and Paragraph Text.
 
 ### JPL Mars Space Images - Featured Image
 
-* Visit the url for JPL Featured Space Image [here](https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars).
-
-* Use splinter to navigate the site and find the complete image url to the full size `.jpg` image for the current Featured Mars Image.
+* Splinter is used to navigate the site for [JPL Featured Space Image](https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars) and find the complete image url to the full size `.jpg` image for the current Featured Mars Image.
 
 ### Mars Weather
 
-* Visit the Mars Weather twitter account [here](https://twitter.com/marswxreport?lang=en) and scrape the latest Mars weather tweet from the page.
+* The latest Mars weather tweet is scraped from the [Mars Weather twitter account] (https://twitter.com/marswxreport?lang=en).
 
 ### Mars Facts
 
-* Visit the Mars Facts webpage [here](https://space-facts.com/mars/) and use Pandas to scrape the table containing facts about the planet including Diameter, Mass, etc. Convert the data to a HTML table string
+* Pandas is used to scrape the table containing facts about the planet including Diameter, Mass, etc. from the [Mars Facts webpage](https://space-facts.com/mars/) and then the data is converted to a HTML table string.
 
 ### Mars Hemispheres
 
-* Visit the USGS Astrogeology site [here](https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars) to obtain high resolution images for each of Mar's hemispheres.
-
-* Save both the image url string for the full resolution hemisphere image, and the Hemisphere title containing the hemisphere name.
+* High resolution images for each of Mar's hemispheres are obtained from the [USGS Astrogeology site](https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars) and both the image url string for the full resolution hemisphere image, and the Hemisphere title containing the hemisphere name are saved to variables.
 
 - - -
 
 ## Step 2 - MongoDB and Flask Application
 
-Use MongoDB with Flask templating to create a new HTML page that displays all of the information that was scraped from the URLs above.
+MongoDB with Flask templating is used to create a new HTML page that displays all of the information that was scraped from the URLs above.
 
-* `index.html` displays all of the scraped data in the appropriate HTML elements using Bootstrap Grid.
+* All of the scraped data is displayed in the appropriate HTML elements using Bootstrap Grid.
 
 ## Requirements
 ### Modules Required
